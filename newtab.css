@@ -1,0 +1,33 @@
+* {
+	margin: 0px;
+	padding: 0px;
+}
+
+body {
+	width: 100%;
+	background-color: #2a3338; 
+}
+
+* {
+	margin: 0px;
+	padding:0px; 
+}
+
+.container {
+	width: 960px;
+	margin: 30px auto;
+	text-align:center;
+	color: white;
+}
+
+#one {
+	letter-spacing: 1.5px;
+	font-size: 56px;
+}
+
+#author {
+	position: absolute;
+	top:560px;
+	left:980px;
+	font-size: 28px;
+}
