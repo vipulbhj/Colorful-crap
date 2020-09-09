@@ -3,7 +3,7 @@ var colors = [
 	'#962a49',
 	'#9bae5d',
 	'#887db4',
-	'#cfa76a' 
+	'#cfa76a'
 	];
 
 var quotes = {
@@ -16,18 +16,19 @@ var quotes = {
 					"I choose a lazy person to do a hard job. Because a lazy person will find an easy way to do it.",
 					"Success is a lousy teacher. It seduces smart people into thinking they can't lose.",
 					"Be nice to nerds. Chances are you'll end up working for one."
-			]		
+			]
 };
 
-function checkForFirstUse() { 
-	chrome.storage.sync.get("Unknown",function(items) {
-		if(typeof items["Unknown"] === 'undefined') {
-			chrome.storage.sync.set(quotes,function() {
+function checkForFirstUse() {
+	chrome.storage.sync.get("colourfulCrapStorage", function(items) {
+    if(Object.keys(items).length === 0) {
+			chrome.storage.sync.set({
+        "colourfulCrapStorage": quotes
+      }, function() {
 				console.log("Quotes have been initialized");
 			});
-		} 
+		}
 	});
 }
+
 checkForFirstUse();
-
-

@@ -9,14 +9,13 @@ $(function() {
       alert("Please provide a quote");
     }
     else {
-      chrome.storage.sync.get(null,function(items) {
-        var keys = Object.keys(items);
-        if(keys.include(author)) {
-          items[author].push(quote);
-        }
-        else {
-          chrome.storage.sync.set({author: quote});
-        }
+      chrome.storage.sync.get('colourfulCrapStorage', function(items) {
+        var quotes = items['colourfulCrapStorage'];
+        quotes[author] = quotes[author] || [];
+        quotes[author].push(quote);
+        chrome.storage.sync.set(items, function() {
+          alert('Quote added successfully');
+        });
       });
     }
   });
