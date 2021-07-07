@@ -13,12 +13,10 @@ $(function() {
 
 	function unnamed() {
 		quoteKeys = Object.keys(quotesFetched);
-		// console.log(quoteKeys);
 		var lenColors = colors.length;
 		var lenQuotes = quoteKeys.length;
 		var randQuoteKey = Math.floor(Math.random() * 4631802156411384 % lenQuotes);
 		var key = quoteKeys[randQuoteKey];
-		// console.log(key);
 		allQuotesByKey = quotesFetched[key];
 		var lenQuoteByKey = allQuotesByKey.length;
 		var randQuoteByKey = Math.floor(Math.random() * 9887008941393133 % lenQuoteByKey);
@@ -47,12 +45,11 @@ $(function() {
 	}
 
 	function start() {
-		chrome.storage.sync.get(null,function(items) {
-			quotesFetched = items;
+		chrome.storage.sync.get('colourfulCrapStorage', function(items) {
+			quotesFetched = items['colourfulCrapStorage'];
 			console.log(items);
 			unnamed();
-			// One min wait.
-			setInterval(unnamed,60000);
+			setInterval(unnamed, 60000);
 		});
 	}
 

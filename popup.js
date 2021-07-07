@@ -1,34 +1,22 @@
 $(function() {
-    $("#button").click(function() {
-        var author = $("#author").val();
-        var quote = $("#quote").val();
-        if(!author) {
-            alert("Please provide a author");
-        }
-        else if(!quote) {
-            alert("Please provide a quote");
-        }
-        else {
-            alert(author);
-            chrome.storage.sync.get(null,function(items) {
-                var keys = Object.keys(items);
-                var found = false;
-                for(var i=0,l=keys.length;i<l;i++) {
-                    if(keys[i] === author) {
-                        found = true;
-                        break;
-                    }
-                }
-                if(found) {
-                    items[author].push(quote);
-                }
-                else {
-                    var ob = {};
-                    ob[author] = [quote];
-                    chrome.storage.sync.set(ob);
-                }
-                // console.log(items);
-            });
-        }
-    });
+  $("#button").click(function() {
+    var author = $("#author").val();
+    var quote = $("#quote").val();
+    if(!author) {
+      alert("Please provide a author");
+    }
+    else if(!quote) {
+      alert("Please provide a quote");
+    }
+    else {
+      chrome.storage.sync.get('colourfulCrapStorage', function(items) {
+        var quotes = items['colourfulCrapStorage'];
+        quotes[author] = quotes[author] || [];
+        quotes[author].push(quote);
+        chrome.storage.sync.set(items, function() {
+          alert('Quote added successfully');
+        });
+      });
+    }
+  });
 });
